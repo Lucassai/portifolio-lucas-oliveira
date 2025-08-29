@@ -1,101 +1,96 @@
-import { useState, useEffect, useCallback } from 'react'
-import { AnimatePresence, motion } from 'framer-motion'
+import { useState } from 'react'
 
 const projetos = [
   {
-    titulo: 'Delivery Home Page',
+    nome: 'Delivery',
+    notebook:
+      'https://ik.imagekit.io/lkxant9gz/Delivery%20home%20page?updatedAt=1756491121767',
+    smartphone:
+      'https://ik.imagekit.io/lkxant9gz/Captura%20de%20tela%20de%202025-08-29%2015-13-00.png?updatedAt=1756494558723',
     link: 'https://delivey-pi.vercel.app/',
-    imagens: [
-      'https://ik.imagekit.io/lkxant9gz/Delivery%20home%20page?updatedAt=1744139030560',
-    ],
   },
   {
-    titulo: 'Barber Shop Home Page',
-    link: 'https://barbearia-react-two.vercel.app/',
-    imagens: [
-      'https://ik.imagekit.io/lkxant9gz/Captura%20de%20tela%20de%202025-08-13%2013-51-55.png?updatedAt=1755104027421',
-      'https://ik.imagekit.io/lkxant9gz/Captura%20de%20tela%20de%202025-08-13%2013-51-37.png?updatedAt=1755104027048',
-    ],
-  },
-  {
-    titulo: 'Sistema de Recursos Humanos',
+    nome: 'RH',
+    notebook:
+      'https://ik.imagekit.io/lkxant9gz/Captura%20de%20tela%20de%202025-08-29%2017-31-57.png?updatedAt=1756499536081',
+    smartphone:
+      'https://ik.imagekit.io/lkxant9gz/Captura%20de%20tela%20de%202025-08-29%2017-29-34.png?updatedAt=1756499535282',
     link: 'https://rh77-react-ten.vercel.app/',
-    imagens: [
-      'https://ik.imagekit.io/lkxant9gz/Captura%20de%20tela%20de%202025-08-14%2011-49-49.png?updatedAt=1755183031172',
-      'https://ik.imagekit.io/lkxant9gz/Captura%20de%20tela%20de%202025-08-14%2011-49-55.png?updatedAt=1755183031163',
-    ],
+  },
+  {
+    nome: 'Barbearia',
+    notebook:
+      'https://ik.imagekit.io/lkxant9gz/Captura%20de%20tela%20de%202025-08-29%2017-31-20.png?updatedAt=1756499535123',
+    smartphone:
+      'https://ik.imagekit.io/lkxant9gz/Captura%20de%20tela%20de%202025-08-29%2017-29-59.png?updatedAt=1756499674221',
+    link: 'https://barbearia-react-two.vercel.app/',
   },
 ]
 
 function Projetos() {
-  const [foco, setFoco] = useState(0)
+  const [index, setIndex] = useState(0)
 
-  // Troca o projeto com scroll
-  const handleWheel = useCallback((e: WheelEvent) => {
-    if (e.deltaY > 0) {
-      setFoco((prev) => Math.min(prev + 1, projetos.length - 1))
-    } else if (e.deltaY < 0) {
-      setFoco((prev) => Math.max(prev - 1, 0))
-    }
-  }, [])
-
-  useEffect(() => {
-    window.addEventListener('wheel', handleWheel)
-    return () => window.removeEventListener('wheel', handleWheel)
-  }, [handleWheel])
+  const next = () => setIndex((i) => (i + 1) % projetos.length)
+  const prev = () =>
+    setIndex((i) => (i - 1 + projetos.length) % projetos.length)
 
   return (
-    <div className="flex items-center justify-center min-h-screen">
-      <div className="items-center flex flex-col justify-center bg-white/10 backdrop-blur-sm rounded-3xl shadow-lg p-6 max-w-md mx-auto w-full">
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={projetos[foco].titulo}
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -40 }}
-            transition={{ duration: 0.4 }}
-            className="w-full flex flex-col items-center justify-center"
-          >
-            <a
-              href={projetos[foco].link}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-amber-50 text-lg font-bold hover:underline"
-            >
-              <h1 className="text-lg font-bold text-amber-50 text-center m-4">
-                {projetos[foco].titulo}
-              </h1>
-              <div
-                className={
-                  projetos[foco].imagens.length > 1
-                    ? 'grid grid-cols-2 gap-4'
-                    : ''
-                }
-              >
-                {projetos[foco].imagens.map((img, i) => (
-                  <img
-                    key={i}
-                    className="rounded-3xl shadow-lg border-2 border-cyan-50 hover:scale-105 transition-transform duration-300"
-                    src={img}
-                    alt={projetos[foco].titulo}
-                  />
-                ))}
-              </div>
-            </a>
-          </motion.div>
-        </AnimatePresence>
-        <div className="flex justify-center space-x-2 mt-4">
-          {projetos.map((_, idx) => (
-            <button
-              key={idx}
-              className={`w-3 h-3 rounded-full ${
-                foco === idx ? 'bg-amber-500' : 'bg-white/30'
-              }`}
-              onClick={() => setFoco(idx)}
-              aria-label={`Selecionar projeto ${idx + 1}`}
-            />
-          ))}
-        </div>
+    <div className="flex flex-col items-center justify-center min-h-screen">
+      <div className="flex justify-center bg-white/10 rounded-2xl pt-4 relative h-120 w-[600px] shadow-lg">
+        <a
+          href=" https://delivey-pi.vercel.app/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {/* Notebook tela */}
+          <img
+            className="absolute left-1/2 top-21 transform -translate-x-1/2 w-[405px] shadow-lg border-2"
+            src={projetos[index].notebook}
+            alt={projetos[index].nome + ' notebook'}
+          />
+          {/* Notebook base */}
+          <img
+            className="absolute left-1/2 top-16 transform -translate-x-1/2 w-[500px] "
+            src="https://ik.imagekit.io/lkxant9gz/portatil-realista-2.png?updatedAt=1756496342005"
+            alt="notebook"
+          />
+        </a>
+
+        {/* Smartphone tela */}
+        <img
+          className="absolute left-[30%] top-[195px] transform -translate-x-1/2 w-[110px] rounded-2xl shadow-lg border-2 border-black-50"
+          src={projetos[index].smartphone}
+          alt={projetos[index].nome + ' smartphone'}
+        />
+
+        {/* Smartphone base */}
+        <img
+          className="absolute left-[30%] top-48 transform -translate-x-1/2 w-[120px] pointer-events-none"
+          src="https://ik.imagekit.io/lkxant9gz/vecteezy_smartphone-interface-phone-mockup-with-empty-screen_19786960.png?updatedAt=1756491341663"
+          alt="smartphone"
+        />
+      </div>
+      <div className="flex space-x-4 mt-8 items-center">
+        <button
+          className="bg-cyan-700 text-white px-4 py-2 rounded hover:bg-cyan-900"
+          onClick={prev}
+        >
+          Anterior
+        </button>
+        <a
+          href={projetos[index].link}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-amber-50 font-bold underline hover:text-cyan-400 transition"
+        >
+          {projetos[index].nome}
+        </a>
+        <button
+          className="bg-cyan-700 text-white px-4 py-2 rounded hover:bg-cyan-900"
+          onClick={next}
+        >
+          Próximo
+        </button>
       </div>
     </div>
   )

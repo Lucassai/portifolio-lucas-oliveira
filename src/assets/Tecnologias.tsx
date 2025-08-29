@@ -12,7 +12,7 @@ import { SiMysql, SiNestjs, SiPrisma, SiVite } from 'react-icons/si'
 function Tecnologias() {
   return (
     <div className="flex items-center justify-center min-h-screen">
-      <div className="items-center flex flex-col justify-center bg-white/10 backdrop-blur-sm rounded-3xl shadow-lg p-6 max-w-md mx-auto">
+      <div className="items-center flex flex-col justify-center bg-white/10 backdrop-blur-sm rounded-3xl shadow-lg p-6 max-w-md  mx-auto">
         <h1 className="text-2xl font-bold text-cyan-50 text-center">
           Tecnologias
         </h1>
