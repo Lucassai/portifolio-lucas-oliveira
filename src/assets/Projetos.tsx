@@ -75,13 +75,13 @@ function Projetos() {
           className="bg-cyan-700 text-white px-4 py-2 rounded hover:bg-cyan-900"
           onClick={prev}
         >
-          Anterior
+          ◀
         </button>
         <a
           href={projetos[index].link}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-amber-50 font-bold underline hover:text-cyan-400 transition"
+          className="text-amber-50 font-bold  hover:text-cyan-400 transition"
         >
           {projetos[index].nome}
         </a>
@@ -89,7 +89,7 @@ function Projetos() {
           className="bg-cyan-700 text-white px-4 py-2 rounded hover:bg-cyan-900"
           onClick={next}
         >
-          Próximo
+          ▶
         </button>
       </div>
     </div>
